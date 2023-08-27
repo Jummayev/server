@@ -7,5 +7,6 @@ SERVER_TYPE=( "$(whiptail --title "Select your server" \
   "ubuntu_20" "Ubuntu 20" OFF \
   "ubuntu_22" "Ubuntu 22" OFF 3>&1 1>&2 2>&3)" )
 
-  chmod +x server.sh  ./"${SERVER_TYPE[0]}"/server.sh
-./"${SERVER_TYPE[0]}"/server.sh
+for choice in "${SERVER_TYPE[@]}"; do
+./${choice}/server.sh
+done
