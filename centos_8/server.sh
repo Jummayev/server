@@ -1,28 +1,41 @@
 #!/bin/bash
 
-PROGRAM_TYPE=( "$(whiptail --title "Select your server" \
-  --checklist "Choose something" 20 80 7  \
+# Tanlangan programmalar uchun o'zgaruvchilar
+selected_programs=( "$(whiptail --title "Serveringizni tanlang" \
+  --checklist "Nima tanaysiz?" 20 80 7  \
   "php_7_4" "Centos 7" OFF \
   "php_8_0" "Centos 8" ON \
   "php_8_1" "Ubuntu 20" OFF \
   "redis" "Ubuntu 20" ON \
   "postgres_15" "Ubuntu 22" ON 3>&1 1>&2 2>&3)" )
 
-if [ -z "${PROGRAM_TYPE[*]}" ]; then
-    echo "Siz birinta ham programma tanlamadiz biz kegin nima ish qilishni bilmay dasturni yopdik"
-  else
-    for choice in "${PROGRAM_TYPE[@]}"; do
-      if [ "$choice" =  "php_7_4" ]; then
-        echo "php_7_4"
-      elif [ "$choice" =  "php_8_0" ]; then
-        echo "php_8_0"
-      elif [ "$choice" =  "php_8_1" ]; then
-        echo "php_8_1"
-      elif [ "$choice" =  "redis" ]; then
-        echo "redis"
-      elif [ "$choice" =  "postgres_15" ]; then
-        echo "postgres_15"
-      fi
+# Tanlanmagan holatni tekshirish
+if [ -z "${selected_programs[*]}" ]; then
+    echo "Siz hech qanday dasturni tanlamadingiz. Dastur boshlandi."
+else
+    # Tanlangan programmalar bo'yicha amallar
+    for choice in ${selected_programs}; do
+        case "$choice" in
+            '"php_7_4"')
+                echo "php_7_4 tanlandi."
+                # Boshqa amalni bajarish mumkin
+                ;;
+            '"php_8_0"')
+                echo "php_8_0 tanlandi."
+                # Boshqa amalni bajarish mumkin
+                ;;
+            '"php_8_1"')
+                echo "php_8_1 tanlandi."
+                # Boshqa amalni bajarish mumkin
+                ;;
+            '"redis"')
+                echo "redis tanlandi."
+                # Boshqa amalni bajarish mumkin
+                ;;
+            '"postgres_15"')
+                echo "postgres_15 tanlandi."
+                # Boshqa amalni bajarish mumkin
+                ;;
+        esac
     done
 fi
-
